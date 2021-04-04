@@ -7,27 +7,27 @@
 * Из множества оценок автоматически высчитывается средняя оценка произведения.
 ## Запуск приложения
 1. Создайте рабочую директорию для хранения проекта:
-> `mkdir ~/Dev`
+<br> `mkdir ~/Dev`
 2. Склонируйте репозиторий на ваш компьютер:
-> `git clone https://github.com/Talpik/infra_sp2.git ~/Dev/yamdb`
+<br> `git clone https://github.com/Talpik/infra_sp2.git ~/Dev/yamdb`
 3. Установите Docker для запуска приложения:
-> <https://docs.docker.com/engine/install/>
+<br> <https://docs.docker.com/engine/install/>
 4. Перейдите в папку проекта **yamdb**:
-> `cd ~/Dev/yambd`
+<br> `cd ~/Dev/yambd`
 5. Запустите утилиту **docker-compose**, чтобы развернуть контейнеры:
-> `docker-compose up`
+<br> `docker-compose up`
 6. Проверьте запущенные контейнеры:
-> `docker container ls` и скопируйте занчение **CONTAINER ID** контейнера **web**
+<br> `docker container ls` и скопируйте занчение **CONTAINER ID** контейнера **web**
 7. Проведите миграции внутри контейнера **web**:
-> `docker exec -it <container id> python manage.py migrate`
+<br> `docker exec -it <container id> python manage.py migrate`
 8. Создайте суперпользователя:
-> `docker exec -it <container id> python manage.py createsuperuser` *(email явлвется обязательным - по нему осуществляется доступ в админку)*
+<br> `docker exec -it <container id> python manage.py createsuperuser` *(email явлвется обязательным - по нему осуществляется доступ в админку)*
 9. Заполните базу начальными данными из подготовленного файла *fixtures.json*:
-> `docker exec -it <container id> python loaddata fixtures.json`
+<br> `docker exec -it <container id> python loaddata fixtures.json`
 ## Настройка доступных хостов
 Настройка доступных хостов осуществляется в файле *.env*:
-> `ALLOWED_HOSTS=127.0.0.1,localhost`
-> Через запятую можно добавлять другие значения.
+<br> `ALLOWED_HOSTS=127.0.0.1,localhost`
+<br> Через запятую можно добавлять другие значения.
 ## Основные точки доступа
 1. Админка:          <br>`127.0.0.1/admin`
 2. API v1.0:         <br>`127.0.0.1/api/v1`
