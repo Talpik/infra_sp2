@@ -16,7 +16,7 @@ def comma_split_line_to_list(value: str) -> list:
         return []
     return value.split(',')
 
-# Configure out in .env
+
 ALLOWED_HOSTS = config(
     'ALLOWED_HOSTS', default=list(),
     cast=comma_split_line_to_list

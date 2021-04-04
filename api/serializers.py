@@ -1,8 +1,5 @@
 from rest_framework import serializers
 
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework.validators import UniqueValidator
-
 from .models import Comment, Review, Title, Category, Genre
 from .models import User
 

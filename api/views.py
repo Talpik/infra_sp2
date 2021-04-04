@@ -5,21 +5,22 @@ from django.core.mail import send_mail
 
 from django_filters.rest_framework import DjangoFilterBackend
 
-from rest_framework import exceptions, filters, status, viewsets, mixins, permissions
+from rest_framework import filters, status, viewsets, mixins
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, \
     IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from rest_framework.decorators import action, api_view, permission_classes
 
-from .models import Category, Genre, Title, Review, Comment, User
+from .models import Category, Genre, Title, Review, User
 
 from .permissions import IsAdmin, IsAnon, IsModerator, IsAdminOrReadOnly, \
     RetrieveUpdateDestroyPermission, MyCustomPermissionClass, IsAdminPermissions
 
 from .filters import TitlesFilter
 
-from .serializers import CategorySerializer, GenreSerializer, ReviewSerializer, CommentSerializer, TitleSerializer, UserSerializer, ConfirmationCodeSerializer, UserCreationSerializer
+from .serializers import CategorySerializer, GenreSerializer, ReviewSerializer, \
+    CommentSerializer, TitleSerializer, UserSerializer, ConfirmationCodeSerializer, UserCreationSerializer
 
 EMAIL_AUTH = 'authorization@yamdb.fake'
 
@@ -30,7 +31,6 @@ def get_jwt_token(request):
     """
     Receiving a JWT token in exchange for email and confirmation_code. 
     """
-
     serializer = ConfirmationCodeSerializer(data=request.data)
     if not serializer.is_valid():
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -38,7 +38,7 @@ def get_jwt_token(request):
     confirmation_code = serializer.data.get('confirmation_code')
     user = get_object_or_404(User, email=email)
     if default_token_generator.check_token(user, confirmation_code):
-        token = AccessToken.for_user(user)
+        token = default_token_generator.make_token(user)
         return Response({'token': str(token)}, status=status.HTTP_200_OK)
     return Response({'confirmation_code': 'Неверный код подтверждения'},
                     status=status.HTTP_400_BAD_REQUEST)
