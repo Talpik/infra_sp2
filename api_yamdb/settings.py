@@ -1,13 +1,26 @@
 import os
 import datetime
 
+from decouple import config
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'p&l%385148kslhtyn^##a1)ilz@4zqj=rq&agdol^##zgl9(vs'
+SECRET_KEY = config('SECRET_KEY', default='my-secret-key')
 
-DEBUG = False
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['*']
+
+def comma_split_line_to_list(value: str) -> list:
+    if not value:
+        return []
+    return value.split(',')
+
+# Configure out in .env
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS', default=list(),
+    cast=comma_split_line_to_list
+)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -55,12 +68,13 @@ WSGI_APPLICATION = 'api_yamdb.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.postgresql'),
-        'NAME': os.environ.get('POSTGRES_DB'),
-	    'USER': os.environ.get('POSTGRES_USER'),
-	    'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-	    'HOST': os.environ.get('DB_HOST'),
-	    'PORT': os.environ.get('DB_PORT'),
+        'ENGINE': config('DB_ENGINE', default='django.db.backends.postgresql'),
+        'NAME': config('POSTGRES_DB', default='api_yamdb'),
+        'USER': config('POSTGRES_USER', default='api_yamdb'),
+        'PASSWORD': config('POSTGRES_PASSWORD', default='api_yamdb'),
+        'HOST': config('DB_HOST', default='db'),
+        'PORT': config('DB_PORT', default='5432', cast=int),
+        'ATOMIC_REQUESTS': True,
     }
 }
 
