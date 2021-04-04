@@ -29,7 +29,7 @@ EMAIL_AUTH = 'authorization@yamdb.fake'
 @permission_classes([AllowAny])
 def get_jwt_token(request):
     """
-    Receiving a JWT token in exchange for email and confirmation_code. 
+    Receiving a JWT token in exchange for email and confirmation_code.
     """
     serializer = ConfirmationCodeSerializer(data=request.data)
     if not serializer.is_valid():
