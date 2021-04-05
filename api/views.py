@@ -19,8 +19,9 @@ from .permissions import IsAdmin, IsAnon, IsModerator, IsAdminOrReadOnly, \
 
 from .filters import TitlesFilter
 
-from .serializers import CategorySerializer, GenreSerializer, ReviewSerializer, \
-    CommentSerializer, TitleSerializer, UserSerializer, ConfirmationCodeSerializer, UserCreationSerializer
+from .serializers import CategorySerializer, GenreSerializer, \
+    ReviewSerializer, CommentSerializer, TitleSerializer, UserSerializer, \
+    ConfirmationCodeSerializer,  UserCreationSerializer
 
 EMAIL_AUTH = 'authorization@yamdb.fake'
 
