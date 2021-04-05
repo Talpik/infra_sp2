@@ -15,13 +15,14 @@ from rest_framework.decorators import action, api_view, permission_classes
 from .models import Category, Genre, Title, Review, User
 
 from .permissions import IsAdmin, IsAnon, IsModerator, IsAdminOrReadOnly, \
-    RetrieveUpdateDestroyPermission, MyCustomPermissionClass, IsAdminPermissions
+    RetrieveUpdateDestroyPermission, MyCustomPermissionClass, \
+    IsAdminPermissions
 
 from .filters import TitlesFilter
 
 from .serializers import CategorySerializer, GenreSerializer, \
     ReviewSerializer, CommentSerializer, TitleSerializer, UserSerializer, \
-    ConfirmationCodeSerializer,  UserCreationSerializer
+    ConfirmationCodeSerializer, UserCreationSerializer
 
 EMAIL_AUTH = 'authorization@yamdb.fake'
 
