@@ -23,7 +23,7 @@
 8. Создайте суперпользователя:
 <br> `docker exec -it <container id> python manage.py createsuperuser` *(email явлвется обязательным - по нему осуществляется доступ в админку)*
 9. Заполните базу начальными данными из подготовленного файла *fixtures.json*:
-<br> `docker exec -it <container id> python loaddata fixtures.json`
+<br> `docker exec -it <container id> python manage.py loaddata fixtures.json`
 ## Настройка доступных хостов
 Настройка доступных хостов осуществляется в файле *.env*:
 <br> `ALLOWED_HOSTS=127.0.0.1,localhost`
